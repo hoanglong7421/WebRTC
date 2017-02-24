@@ -1,0 +1,183 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+html {
+	position: relative;	
+	min-height: 100%;
+}
+body {
+	font-family: 'Open Sans', sans-serif;
+	background-color: #e4e4e4;	
+	height: 100%;
+	margin-bottom: 75px;
+}
+header {
+	margin-bottom: 25px;
+	padding: 25px;
+	background-color: #005580;
+	color: #f2f2f2;
+	text-align: center;
+	font-size: 25px;
+}
+footer {
+	height: 75px;
+	width: 100%;
+	background-color: #d6d6c2;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+footer p {
+	margin: 25px;
+	text-align: center;
+	color: #000000;
+}
+button {
+	background-color: #d84a38;
+	border: none;
+	border-radius: 5px;
+	color: white;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 20.5px;
+	margin: 5px 0 16px 0;
+	padding: 8px 12px 8px 12px;
+}
+button:active {
+   background-color: #cf402f;
+}
+button:hover {
+   background-color: #cf402f;
+   cursor: pointer;
+}
+button:disabled{
+	background-color: #d6d6d6;
+	color: black;
+}
+video {
+	width: 480px;
+	height: 360px;
+	padding: 0;
+}
+label {
+	float: left;
+	width: 150px;
+	padding-top: 15px;
+	padding-bottom: 5px;
+	padding-left: 10px;
+	text-align: left;
+}
+input {	
+	padding: 9.5px 20px;
+	box-sizing: border-box;
+	border-radius: 5px;
+	border: none;
+	margin: 5px;
+}
+
+#loginPage {
+	width: 600px;
+	margin: auto; 
+	margin-top: 150px;
+	text-align: center;
+}
+	#loginPage input {
+		width: 100%;
+	}
+	
+#debugPage {
+	width: 600px;
+	margin: auto; 
+	margin-top: 150px;
+	display: none;
+}
+
+#callPage {
+	width: 800px;
+	margin: auto;
+	display: none;
+}
+	.title-row {
+		text-align: center;
+		padding: 5px;
+		margin: auto;
+	}
+	h3.title-row {
+		color: white;
+		background-color: #005580;
+		padding: 5px;
+		box-sizing: border-box;
+		border-top-left-radius: 10px;
+		border-top-right-radius: 10px;
+	}
+	.box {
+		height: 600px;
+		min-width: 133px;
+		background-color: white;
+		border-bottom-right-radius: 10px;
+		border-bottom-left-radius: 10px;
+		padding: 10px;
+		word-wrap: break-word;
+		overflow-y: auto;
+	}
+	.searchUserInput {
+		width: 80%;
+		border: 1px solid;
+		margin: auto;
+		margin-bottom: 5px;
+	}
+
+#videoPage {
+	display: none;
+	width: 100%;
+}
+	#videoArea {
+		width: 85%;
+		float: left;
+		text-align: center;
+		min-height: 98vh;
+	}
+	#localVideo {
+		height: 180px;
+		width: 240px;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		z-index: 100;
+	}
+	.remoteDiv {
+		width: 480px;
+		height: 360px;
+		display: inline-block;
+		position: relative;
+	}
+
+	#chatArea {
+		width: 15%;
+		float: left;
+		margin-left: -10px;
+	}
+	#textArea {
+		height: 670px;
+		border-radius: 10px;
+	}
+	#messageInput {
+		margin-left: 0;
+		border-radius: 10px;
+	}
+
+.icon {
+	width: 20px;
+	height: 20px;
+}
+.muteIcon {
+	width: 35px;
+	height: 35px;
+	position: absolute;
+	left: 0;
+	top: 5px;
+	z-index: 80;
+}
+.no-close .ui-dialog-titlebar-close {
+  display: none;
+}
