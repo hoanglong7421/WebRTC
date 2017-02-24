@@ -5,97 +5,100 @@
 	<meta charset="utf8"/>
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
 	<link rel="stylesheet" href="/css/main.css">
-	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
-	<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
-  	<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+	<link rel="stylesheet" href="/lib/jquery-ui.min.css">
+	<script src="/lib/jquery-3.1.1.min.js"></script>
+  	<script src="/lib/jquery-ui.min.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
 </head>
-<body onresize="resize()">
+<body>
 	<!-- <header>WebRTC Demo</header> -->
 	<div style="padding-top: 15px;">
-		<div id="loginPage">
-			<label><b>Username: </b></label>
-			<input type="text" name="user" id="userNameInput" autofocus />
+	
+	<div id="loginPage">
+		<label><b>Username: </b></label>
+		<input type="text" name="user" id="userNameInput" autofocus />
 
-			<br><br>
-			<button id="loginBtn" type="submit" value="Submit">Login</button>
-			<button id="debugBtn" type="button">Debug</button>
+		<br><br>
+		<button id="loginBtn" type="submit" value="Submit">Login</button>
+		<button id="debugBtn" type="button" class="">Config</button>
+	</div>
+
+	<div id="mainPage">
+		<center><h2 id="helloUser"></h2></center>
+		<div class="title-row">
+			<h3 class="title-row">Online Users</h3>
+			<div class="box">
+				<input type="text" class="searchUserInput" placeholder="search username">
+				<div id="userList"></div>
+			</div>
 		</div>
 
-		<div id="debugPage">
-			<label>Signaling Server: </label>
-			<input type="text" name="signalingServer" id="signalingServer" placeholder="http://" size="30">
-			: <input type="text" name="portSignalingServer" id="portSignalingServer" size="6" placeholder="port">
-			<br><br>
+		<div id="confirmPopUp">
+			<p></p>
+		</div>
+	</div>
 
-			<label>Turn Server: </label>
-			<input type="text" name="hostTurnServer" id="hostTurnServer" placeholder="Host">
-			: <input type="text" name="portTurnServer" id="portTurnServer" size="6" placeholder="port"><br>
-
-			<label>&nbsp;</label>
-			<input type="text" name="userNameServer" id="userNameServer" placeholder="Username"><br>
-			<label>&nbsp;</label>
-			<input type="password" name="passwordServer" id="passwordServer" placeholder="Password">
-			<br><br>
-
-			<label>Stun Server: </label>
-			<input type="text" name="hostStunServer" id="hostStunServer" placeholder="Host">
-			: <input type="text" name="portStunServer" id="portStunServer" size="6" placeholder="port">
-			<br><br>
-
+	<div id="videoPage">
+		<div id="videoArea">
 			<center>
-				<button id="saveConfigBtn">Save & Close</button>
+				<button id="addMemberBtn" class="control">Invite</button>
+				<button id="videoMuteBtn" class="control unclickable" value="on">
+					<img id="videoImg" class="icon" src="img/cam-on.png">
+				</button>
+				<button id="audioMuteBtn" class="control unclickable" value="on">
+					<img id="audioImg" class="icon" src="img/mic-on.png">
+				</button>
+				<button id="hangupBtn" class="control">End</button>
 			</center>
+			<video id="localVideo" autoplay muted></video>
 		</div>
 
-		<div id="callPage">
-			<center><h2 id="helloUser"></h2></center>
-			<div class="title-row">
-				<h3 class="title-row">Online Users</h3>
-				<div class="box">
-					<input type="text" class="searchUserInput" placeholder="search username">
-					<div id="userList"></div>
-				</div>
-			</div>
-
-			<div id="confirmPopUp">
-				<p></p>
-			</div>
+		<div id="chatArea">
+			<div id="textArea" class="box"></div>
+			<input type="text" id="messageInput" class="hidden" size="12" placeholder="message here">
+			<button id="sendBtn" class="hidden">Send</button>
 		</div>
 
-		<div id="videoPage">
-			<div id="videoArea">
-				<center>
-					<button id="addMemberBtn">Add Member</button>
-					<button id="videoMuteBtn" value="on">
-						<img id="videoImg" class="icon" src="img/cam-on.png">
-					</button>
-					<button id="audioMuteBtn" value="on">
-						<img id="audioImg" class="icon" src="img/mic-on.png">
-					</button>
-					<button id="hangupBtn">Hang Up</button>
-				</center>
-				<video id="localVideo" autoplay muted></video>
-			</div>
-
-			<div id="chatArea">
-				<div id="textArea" class="box"></div>
-				<input type="text" id="messageInput" size="12" placeholder="message here">
-				<button id="sendBtn">Send</button>
-			</div>
-
-			<div class="title-row" id="addMemberPopup">
-				<h3 class="title-row">Online Users</h3>
-				<div class="box">
-					<input type="text" class="searchUserInput" placeholder="search username">
-					<div id="otherUsers"></div>
-				</div>
+		<div class="title-row" id="addMemberPopup">
+			<h3 class="title-row">Online Users</h3>
+			<div class="box">
+				<input type="text" class="searchUserInput" placeholder="search username">
+				<div id="otherUsers"></div>
 			</div>
 		</div>
 	</div>
+
+	<div id="debugPage">
+		<label>Signaling Server: </label>
+		<input type="text" name="signalingServer" id="signalingServer" placeholder="http://" size="30">
+		: <input type="text" name="portSignalingServer" id="portSignalingServer" size="6" placeholder="port">
+		<br><br>
+
+		<label>Turn Server: </label>
+		<input type="text" name="hostTurnServer" id="hostTurnServer" placeholder="Host">
+		: <input type="text" name="portTurnServer" id="portTurnServer" size="6" placeholder="port"><br>
+
+		<label>&nbsp;</label>
+		<input type="text" name="userNameServer" id="userNameServer" placeholder="Username"><br>
+		<label>&nbsp;</label>
+		<input type="password" name="passwordServer" id="passwordServer" placeholder="Password">
+		<br><br>
+
+		<label>Stun Server: </label>
+		<input type="text" name="hostStunServer" id="hostStunServer" placeholder="Host">
+		: <input type="text" name="portStunServer" id="portStunServer" size="6" placeholder="port">
+		<br><br>
+
+		<center>
+			<button id="saveConfigBtn">Save & Close</button>
+		</center>
+	</div>
+
 	<script src="js/adapter.js"></script>
+	<script src="js/global.js"></script>
 	<script src="js/main.js"></script>
 	<script src="js/debug.js"></script>
+	<script src="js/chat.js"></script>
 	<script>
 		$(function() {
 			$("#localVideo").draggable({
@@ -109,7 +112,7 @@
 			$("#addMemberPopup").dialog({
 		    	autoOpen: false,
 		    	resizable: false,
-		    	draggable: false,
+		    	// draggable: false,
 		      	show: {
 		        	effect: "blind",
 		        	duration: 200
@@ -124,12 +127,14 @@
 		    	dialogClass: "no-close",
 		    	autoOpen: false,
 		    	resizable: false,
-		    	draggable: false,
-		      	width: 400,
+		    	// draggable: false,
+		      	width: "auto",
 		      	height: "auto"
 		    });
 		});
 	</script>
-	<!-- <footer><p>Copyright 2016 by Beetsoft</p></footer> -->
+	
+	</div>
+	<!-- <footer><p>Copyright 2016</p></footer> -->
 </body>
 </html>

@@ -8,7 +8,7 @@ html {
 }
 body {
 	font-family: 'Open Sans', sans-serif;
-	background-color: #e4e4e4;	
+	background-color: #e9ebee;	
 	height: 100%;
 	margin-bottom: 75px;
 }
@@ -33,30 +33,9 @@ footer p {
 	text-align: center;
 	color: #000000;
 }
-button {
-	background-color: #d84a38;
-	border: none;
-	border-radius: 5px;
-	color: white;
-	font-family: 'Open Sans', sans-serif;
-	font-size: 20.5px;
-	margin: 5px 0 16px 0;
-	padding: 8px 12px 8px 12px;
-}
-button:active {
-   background-color: #cf402f;
-}
-button:hover {
-   background-color: #cf402f;
-   cursor: pointer;
-}
-button:disabled{
-	background-color: #d6d6d6;
-	color: black;
-}
 video {
-	width: 480px;
-	height: 360px;
+	/*width: 480px;*/
+	/*height: 360px;*/
 	padding: 0;
 }
 label {
@@ -74,7 +53,13 @@ input {
 	border: none;
 	margin: 5px;
 }
+p {
+	line-height: 50px;
+}
 
+/***************************
+		Login Page
+***************************/
 #loginPage {
 	width: 600px;
 	margin: auto; 
@@ -84,15 +69,19 @@ input {
 	#loginPage input {
 		width: 100%;
 	}
-	
+/***************************
+		Debug Page
+***************************/
 #debugPage {
 	width: 600px;
 	margin: auto; 
 	margin-top: 150px;
 	display: none;
 }
-
-#callPage {
+/***************************
+		Main Page
+***************************/
+#mainPage {
 	width: 800px;
 	margin: auto;
 	display: none;
@@ -104,7 +93,7 @@ input {
 	}
 	h3.title-row {
 		color: white;
-		background-color: #005580;
+		background-color: #3b5998;
 		padding: 5px;
 		box-sizing: border-box;
 		border-top-left-radius: 10px;
@@ -126,7 +115,9 @@ input {
 		margin: auto;
 		margin-bottom: 5px;
 	}
-
+/***************************
+		Video Page
+***************************/
 #videoPage {
 	display: none;
 	width: 100%;
@@ -137,47 +128,92 @@ input {
 		text-align: center;
 		min-height: 98vh;
 	}
-	#localVideo {
-		height: 180px;
-		width: 240px;
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		z-index: 100;
-	}
-	.remoteDiv {
-		width: 480px;
-		height: 360px;
-		display: inline-block;
-		position: relative;
-	}
+		#localVideo {
+			height: 180px;
+			width: 240px;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			z-index: 100;
+		}
+		.remoteDiv {
+			/*width: 480px;*/
+			/*height: 360px;*/
+			display: inline-block;
+			position: relative;
+			margin: 5px;
+		}
 
 	#chatArea {
 		width: 15%;
 		float: left;
 		margin-left: -10px;
 	}
-	#textArea {
-		height: 670px;
-		border-radius: 10px;
-	}
-	#messageInput {
-		margin-left: 0;
-		border-radius: 10px;
-	}
+		#textArea {
+			height: 670px;
+			border-radius: 10px;
+		}
+		#messageInput {
+			margin-left: 0;
+			border-radius: 10px;
+		}
 
+	.ctlBtn,.kickBtn {
+		font-size: initial;
+	}
+/* buttons */
+button {
+	margin: 5px 0 16px 0;
+	padding: 5px 15px;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 24px;
+	line-height: 26px;
+	background-color: #3b5998;
+	color: white;
+	border: none;
+	border-radius: 2px;
+}
+button:active {
+   opacity: 0.7;
+}
+button:hover {
+	opacity: 0.7;
+   	cursor: pointer;
+}
+button:disabled{
+	background-color: #d6d6d6;
+	color: black;
+	cursor: default;
+}
+button:focus {
+	outline: none;
+}
+button.control {
+	line-height: 43px;
+}
+/***************************
+			Class
+***************************/
 .icon {
-	width: 20px;
-	height: 20px;
+	width: 30px;
+	height: 30px;
+	position: relative;
+	top: 6px;
 }
 .muteIcon {
-	width: 35px;
-	height: 35px;
+	width: 44px;
+	height: 44px;
 	position: absolute;
 	left: 0;
 	top: 5px;
 	z-index: 80;
 }
 .no-close .ui-dialog-titlebar-close {
-  display: none;
+  	display: none;
+}
+.hidden {
+	display: none !important;
+}
+.unclickable {
+	pointer-events: none;
 }

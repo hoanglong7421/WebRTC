@@ -16,7 +16,7 @@ var ERROR_SOCKET_EXIST = 1001;
 var ERROR_USERNAME_EXIST = 1002;
 
 // when there one connect
-var user = [];
+var users = [];
 io.on('connection', function(socket) {
     console.log('[connection]', ' socket: ' + socket.id + ' connected');
     var roomCurrent = -1;
@@ -28,7 +28,7 @@ io.on('connection', function(socket) {
             socket: socket.id
         };
         // check socket exist
-        if (_.findIndex(user, {
+        if (_.findIndex(users, {
                 socket: socket.id
             }) !== -1) {
             console.log('[login]', 'Error: socket.id exists. ' + socket.id);
@@ -39,7 +39,7 @@ io.on('connection', function(socket) {
             return;
         }
         // check username exist
-        if (_.findIndex(user, {
+        if (_.findIndex(users, {
                 username: username
             }) !== -1) {
             console.log('[login]', 'Error: username exists. ' + username);
@@ -50,11 +50,11 @@ io.on('connection', function(socket) {
             return;
         }
         // when login succesfull
-        user.push(userCurrent);
+        users.push(userCurrent);
         console.log('[login]', 'Successfully');
         socket.emit('on_login', {
             status: true,
-            list_user: user,
+            list_user: users,
         });
 
         socket.broadcast.emit('on_online', {
@@ -64,20 +64,20 @@ io.on('connection', function(socket) {
     });
 
     socket.on('createRoom', function(username) {
-    	console.log('[createRoom]', socket.id, username, 'isInRoom: ' + isInRoom);
+    	console.log('[createRoom]', socket.id, 'isInRoom: ' + isInRoom);
         if (isInRoom === false) {
             /// do something
-            var x = '' + new Date().getTime();
+            var x = 'z' + socket.id;
             roomCurrent = x;
             socket.join(x);
         }
         var inviteInfo = {
             room: roomCurrent,
-            username: user[_.findIndex(user, {
+            username: users[_.findIndex(users, {
                 socket: socket.id
             })].username
         };
-        io.to(user[_.findIndex(user, {
+        io.to(users[_.findIndex(users, {
             username: username
         })].socket).emit('invite', inviteInfo);
 
@@ -116,7 +116,7 @@ io.on('connection', function(socket) {
     socket.on('message', function(data) {
         data.from = socket.id;
         console.log('[message]', socket.id, data);
-        socket.broadcast.to(roomCurrent).emit('receiveMessage', data);
+        io.to(data.to).emit('receiveMessage', data);
     });
 
     // options video audio
@@ -141,17 +141,17 @@ io.on('connection', function(socket) {
     // when client disconnect
     socket.on('disconnect', function() {
         console.log('[disconnect]', socket.id);
-        var uIndex = _.findIndex(user, {
+        var uIndex = _.findIndex(users, {
             socket: socket.id
         });
         if (uIndex !== -1) {
-            console.log('[disconnected]', ' remove username: ' + user[uIndex].username);
+            console.log('[disconnected]', ' remove username: ' + users[uIndex].username);
             socket.broadcast.emit('on_online', {
-                user: user[uIndex],
+                user: users[uIndex],
                 status: false
             });
-            user.splice(uIndex, 1);
-            console.log('[disconnect]', user);
+            users.splice(uIndex, 1);
+            console.log('[disconnect]', users);
         }
     });
 });
